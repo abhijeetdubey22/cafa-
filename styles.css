@@ -1,0 +1,204 @@
+/* Responsive Styles: Mobile + Laptop/Desktop */
+:root {
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --primary-light: #ffedd5;
+  --secondary: #0f172a;
+  --accent: #06b6d4;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+[data-theme="urban"] {
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-light: #d1fae5;
+  --secondary: #111827;
+  --accent: #6366f1;
+  --bg-main: #0b0f19;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide scrollbars for clean horizontal swipe */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism effects */
+.glass-header {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+[data-theme="urban"] .glass-header {
+  background: rgba(17, 24, 39, 0.92);
+}
+
+.glass-bottom {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Card hover animation on laptop/desktop */
+.food-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.food-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* Card image zoom */
+.card-img-wrap img {
+  transition: transform 0.4s ease;
+}
+.food-card:hover .card-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Veg / Non-Veg Icon styles */
+.badge-veg {
+  border: 1.5px solid #16a34a;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: white;
+}
+.badge-veg-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #16a34a;
+  border-radius: 50%;
+}
+.badge-nonveg {
+  border: 1.5px solid #dc2626;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: white;
+}
+.badge-nonveg-dot {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid #dc2626;
+}
+
+/* Cart bounce animation on add */
+@keyframes cart-bounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.cart-pop {
+  animation: cart-bounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Touch active feedback */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Safe area inset for mobile */
+.safe-pb {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* ========================================================
+   PERFECT SIMULATED PHONE VIEW MODE (Fixes Laptop Squish Issue)
+   ======================================================== */
+body.simulated-phone {
+  background-color: #0b0f19 !important;
+  padding: 20px 0 50px 0;
+}
+
+/* Top bar constraints in phone mode */
+body.simulated-phone #top-announcement-bar {
+  max-width: 420px !important;
+  margin: 0 auto 12px auto;
+  border-radius: 12px;
+}
+
+/* Make app wrapper look like a real modern iPhone */
+body.simulated-phone #app-wrapper {
+  max-width: 420px !important;
+  border-radius: 44px;
+  border: 10px solid #1e293b;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Show simulated iPhone Dynamic Island / Speaker notch */
+body.simulated-phone #phone-notch {
+  display: flex !important;
+}
+
+/* Hide desktop-only elements when phone preview is active */
+body.simulated-phone nav,
+body.simulated-phone #header-desktop-cart,
+body.simulated-phone .hero-desktop-strip,
+body.simulated-phone .hero-desktop-visual {
+  display: none !important;
+}
+
+/* Force 1-Column Layout inside the Phone View (Overriding Tailwind md/lg screen queries) */
+body.simulated-phone #menu-container {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+body.simulated-phone .hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+body.simulated-phone .hero-grid > div:first-child {
+  grid-column: span 12 / span 12 !important;
+}
+
+body.simulated-phone .calc-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+body.simulated-phone .calc-grid > div {
+  grid-column: span 12 / span 12 !important;
+}
+
+body.simulated-phone .about-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+/* Constrain floating cart bar inside phone view */
+body.simulated-phone #cart-bar {
+  max-width: 400px !important;
+  margin: 0 auto;
+}
